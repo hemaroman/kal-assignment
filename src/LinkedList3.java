@@ -102,12 +102,23 @@ public class LinkedList3 {
             System.out.println(value + " Exists on the linked list");
 
             else
-            System.out.println(value + " don't Exist on the linked list");
+            System.out.println(value + " Don't Exist on the linked list");
 
             }
 
         void reverse() {
-            //reverse the linked list           }
+            //reverse the linked list
+            var reverse = first;
+            int reverseArray[] = new int[size];
+            int index = size-1;
+
+            while (reverse.nextNode != null) {
+                reverseArray[0] = last.value;
+                reverseArray[index] = reverse.value;
+
+                reverse = reverse.nextNode;
+                index--;
+            }
+            }
         }
 
-    }
