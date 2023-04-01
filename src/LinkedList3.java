@@ -27,7 +27,6 @@ public class LinkedList3 {
             last = node;
         }
         this.size++;
-
     }
 
     void addFirstElement(int value) {
@@ -35,8 +34,6 @@ public class LinkedList3 {
         node.nextNode = first;
         first = node;
         this.size++;
-
-
     }
 
     void addLastElement(int value) {
@@ -47,43 +44,49 @@ public class LinkedList3 {
     }
 
     void removeFirstElement() {
-        var temp = first.nextNode;
-        first.nextNode = null;
-        first.value = temp.value;
-        first.nextNode = temp.nextNode;
+        Node temp = first.nextNode;
+
+//        first.value = temp.value;
+        first = temp;
         this.size--;
-
     }
-
     void removeLastElement() {
+        // check if the list is empty
+        if (first == null) {
+            System.out.println("List is empty");
+        }
+        else {
+            if (first != last) {
+                Node temp = first;
+                while (temp.nextNode != last) {
+                    temp = temp.nextNode;
+                }
+                last = temp;
+                last.nextNode = null;
+            } else {
+                first = last = null;
+            }
+        }
         size--;
-        var temp = last.value;
-
-        last.value = temp;
-        last.nextNode = null;
     }
-
     void printElements() {
-        var current = first;
+        Node current = first;
         if (size != 0) {
-            while (current.nextNode != null) {
-                System.out.println(current.value);
+            while (current != null) {
+                System.out.print(current.value + " ");
                 current = current.nextNode;
             }
-            System.out.println(last.value);
         } else {
             System.out.println("Please Add Elements");
         }
     }
-
     void toArray() {
         //change the linked list to an array
-        int[] listToArray = new int[this.size];
+        int[] listToArray = new int[size];
         int index = 0;
-        var check = first;
-        while (check.nextNode != null) {
+        Node check = first;
+        while (check != null) {
             listToArray[index] = check.value;
-            listToArray[this.size - 1] = last.value;
             check = check.nextNode;
             index++;
         }
@@ -92,44 +95,32 @@ public class LinkedList3 {
 
     boolean isEmpty() {
         //check if the linked list is empty and return boolean value
-        if (this.size == 0) {
+        if (size == 0) {
             System.out.println("Empty");
             return true;
-        } else {
-            System.out.println("Not Empty");
-            return false;
         }
+        System.out.println("Not Empty");
+        return false;
     }
-
     boolean contains(int value) {
         //check if the linked list contains the value and return boolean value if there are elements
-        var checkNod = first;
-        String checklist = "";
+        Node checkNod = first;
         while (checkNod != null) {
             if (value == checkNod.value) {
-                System.out.println(value + " Exists in the linked list");
                 return true;
             }
             checkNod = checkNod.nextNode;
         }
         return false;
     }
+    void reverse() {
+        //reverse the linked list
+      var temp = first;
+      while (temp != last.nextNode){
+          first = temp.nextNode;
+          temp = temp.nextNode;
+          System.out.println(first);
+      }
 
-
-        void reverse() {
-            //reverse the linked list
-            var reverse = first;
-            int reverseArray[] = new int[size];
-            int index = size-1;
-
-            while (reverse.nextNode != null) {
-                reverseArray[0] = last.value;
-                reverseArray[index] = reverse.value;
-
-                reverse = reverse.nextNode;
-                index--;
-            }
-            System.out.println(Arrays.toString(reverseArray));
-            }
-        }
-
+    }
+}
